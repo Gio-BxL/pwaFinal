@@ -7,7 +7,8 @@
 
 let colecciones = {
     articulos: { nombre: 'string', precio: 'number' },
-    clientes: { nombre: 'string', apellidos: 'string' }
+    clientes: { nombre: 'string', apellidos: 'string' },
+    viajes: {lugar: 'string', estado: 'string', fecha: 'date'}
 };
 
 let index = `
@@ -31,6 +32,7 @@ window.addEventListener('load', function () {
     let i = document.getElementById('inicio');
     let a = document.getElementById('articulos');
     let c = document.getElementById('clientes');
+    let v = document.getElementById('viajes');
 
     i.innerHTML = index;
     i.style.display = 'block';
@@ -38,14 +40,16 @@ window.addEventListener('load', function () {
     document.getElementById('menu-inicio').addEventListener('click', function (e) {
         i.style.display = 'block';
         a.style.display = 'none';  a.innerHTML = '';
-        c.style.display = 'none';  c.innerHTML = '';       
+        c.style.display = 'none';  c.innerHTML = '';
+        v.style.display = 'none';  v.innerHTML = '';       
     });
 
     document.getElementById('menu-articulos').addEventListener('click', function (e) {
         verDocumentos('articulos');
         a.style.display = 'block';
         i.style.display = 'none';
-        c.style.display = 'none';  c.innerHTML = '';       
+        c.style.display = 'none';  c.innerHTML = '';
+        v.style.display = 'none';  v.innerHTML = '';       
     });
 
     document.getElementById('menu-clientes').addEventListener('click', function (e) {
@@ -55,6 +59,12 @@ window.addEventListener('load', function () {
         a.style.display = 'none';  a.innerHTML = '';
     });
 
+    document.getElementById('menu-viajes').addEventListener('click', function (e) {
+        verDocumentos('viajes');
+        c.style.display = 'block';
+        i.style.display = 'none';  
+        a.style.display = 'none';  a.innerHTML = '';
+    });
 });
 
 

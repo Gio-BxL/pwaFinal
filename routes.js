@@ -1,5 +1,5 @@
 const express = require('express');
-const { Cliente, Articulo } = require('./models');
+const { Cliente, Articulo, Viaje } = require('./models');
 
 const router = express.Router();
 
@@ -103,6 +103,54 @@ router.post('/articulos', (req, res) => {
     });
 });
 
+//============================
+// VIAJES
+//============================
+
+// ver todos los Clientes
+router.get('/viajes', function (req, res) {
+    Viaje.find({}, (err, data) => {
+        if (err) res.json({ error: err });
+        else     res.json(data);
+    });
+});
+
+
+// ver un Viaje
+router.get('/viajes/:id', (req, res) => {
+    Viaje.findOne({ _id: req.params.id }, (err, data) => {
+        if (err) res.json({ error: err });
+        else     res.json(data);
+    });
+});
+
+
+// eliminar un Viaje
+router.delete('/viajes/:id', (req, res) => {
+    Viaje.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+        if (err) res.json({ error: err });
+        else     res.json(data);
+    });
+});
+
+
+// actualizar un Viaje
+router.put('/viajes/:id', (req, res) => {
+    Viaje.findOneAndUpdate({ _id: req.params.id }, { $set: { lugar: req.body.lugar, estado: req.body.estado, fecha: req.body.fecha } }, (err, data) => {
+        if (err) res.json({ error: err });
+        else     res.json(data);
+    });
+});
+
+
+// insertar un Viaje
+router.post('/viajes', (req, res) => {
+    const viaje = new Viaje({ lugar: req.body.lugar, estado: req.body.estado, fecha: req.body.fecha });
+    viaje.save((err, data) => {
+        if (err) res.json({ error: err });
+        else     res.json(data);
+    });
+});
 
 
 module.exports = router;
